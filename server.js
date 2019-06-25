@@ -24,6 +24,6 @@ server.post('/alldataClassinfo', (req, res) => {
 
 
 })
-server.listen(process.env.PORT || 9091, () => {
-  console.log('server is running on Localhost:9091');
+server.listen(process.env.PORT || 3001, () => {
+  console.log('server is running on Localhost:3001');
 });
