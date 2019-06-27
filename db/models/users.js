@@ -7,6 +7,4 @@ let userSchemaClassinfo = mongoose.Schema({
   remarks: String,
 })
 let ClassInfo = mongoose.model('classinfo', userSchemaClassinfo);
-module.exports = {
-  ClassInfo
-}
+module.exports =  ClassInfo;

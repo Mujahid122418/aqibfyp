@@ -1,29 +1,22 @@
 let express = require('express');
-let bodyparser = require('body-parser');
 var cors = require('cors')
-let server = express();
 let ClassInfo = require('./db/models/users');
+let bodyparser = require('body-parser');
 require('./db/config');
-server.use(bodyparser.urlencoded({extended:false}));
+let server = express();
 server.use(bodyparser.json());
+server.use(bodyparser.urlencoded({ extended: false }));
 server.use(cors());
 server.post('/alldataClassinfo', (req, res) => {
-  console.log(req.body);
-  let newdata = {
-    name: req.body.name,
-    password: req.body.password,
-    classLevel: req.body.classLevel,
-    remarks: req.body.remarks
-  }
-  new ClassInfo(newdata).save();
-  res.json({ success: true })
-  // let newData = new Data(req.body);
-  // newData.save((error, datas) => {
-  //   res.json(error || datas)
-  // })
-
+  let newdata = JSON.parse(JSON.stringify(req.body))
+  var getBody = new ClassInfo(newdata).save();
+  res.json(getBody)
+  console.log(getBody);
 
 })
+
+server.get('/',(req,res)=>{
+res.send('working')})
 server.listen(process.env.PORT || 3001, () => {
   console.log('server is running on Localhost:3001');
 });
