@@ -19,26 +19,68 @@ server.post("/alldataClassinfo", (req, res) => {
   res.json(getBody);
   // console.log(getBody);
 });
-// show all class info on fron end
+// show all classinfo on fron end
 server.get("/showAllClassInfo", (req, res) => {
   ClassInfo.find({}, function(err, classinfo) {
     res.json(classinfo);
   });
 });
-// get the data of User component
+// delete classinfo data
+server.delete("/deleteuser/:userid", (req, res) => {
+  ClassInfo.findOneAndDelete({ _id: req.params.userid }, function(err, users) {
+    res.json(users);
+  });
+});
+// update classinfo
+server.put("/updateuser/:userid", (req, res) => {
+  console.log(req.body);
+  ClassInfo.findOneAndUpdate(
+    { _id: req.params.userid },
+    req.body,
+    (err, users) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.json(users);
+      }
+    }
+  );
+});
+// post the data of User/student component
 server.post("/userData", (req, res) => {
   let newdata = JSON.parse(JSON.stringify(req.body));
   let getBody = new User(newdata).save();
   res.json(getBody);
   // console.log(getBody);
 });
-//show all data of User on front
+//show all data of User/student on front
 server.get("/showUser", (req, res) => {
   User.find({}, function(err, user) {
     res.json(user);
   });
 });
-// get data of teachers component
+//delete User/student
+server.delete("/deletestud/:studentid", (req, res) => {
+  User.findOneAndDelete({ _id: req.params.studentid }, function(err, users) {
+    res.json(users);
+  });
+});
+// update User/Student
+server.put("/updateuserstudent/:userstudent", (req, res) => {
+  console.log(req.body);
+  User.findOneAndUpdate(
+    { _id: req.params.userstudent },
+    req.body,
+    (err, users) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.json(users);
+      }
+    }
+  );
+});
+// post data of teachers component
 server.post("/teacher", (req, res) => {
   let newdata = JSON.parse(JSON.stringify(req.body));
   let getBody = new Teacher(newdata).save();
@@ -51,20 +93,64 @@ server.get("/showTeacher", (req, res) => {
     res.json(teacher);
   });
 });
-// get plan from plan component
+// delete teacher
+server.delete("/deleteteacher/:teacherid", (req, res) => {
+  Teacher.findOneAndDelete({ _id: req.params.teacherid }, function(err, users) {
+    res.json(users);
+  });
+});
+// update teacher
+server.put("/updateuserteacher/:userteacher", (req, res) => {
+  console.log(req.body);
+  Teacher.findOneAndUpdate(
+    { _id: req.params.userteacher },
+    req.body,
+    (err, users) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.json(users);
+      }
+    }
+  );
+});
+// post plan from plan component
 server.post("/plan", (req, res) => {
   let newdata = JSON.parse(JSON.stringify(req.body));
   let getBody = new Plan(newdata).save();
   res.json(getBody);
   console.log(getBody);
 });
+
 // show all data of plan on frontend
 server.get("/showPlan", (req, res) => {
   Plan.find({}, function(err, plan) {
     res.json(plan);
   });
 });
-// get cousre from course component
+// delete plan
+
+server.delete("/deleteplan/:planid", (req, res) => {
+  Plan.findOneAndDelete({ _id: req.params.planid }, function(err, users) {
+    res.json(users);
+  });
+});
+// update Plan
+server.put("/updateuserplan/:userplan", (req, res) => {
+  console.log(req.body);
+  Plan.findOneAndUpdate(
+    { _id: req.params.userplan },
+    req.body,
+    (err, users) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.json(users);
+      }
+    }
+  );
+});
+// post cousre from course component
 server.post("/course", (req, res) => {
   let newData = JSON.parse(JSON.stringify(req.body));
   let getBody = new Course(newData).save();
@@ -77,7 +163,28 @@ server.get("/showCourse", (req, res) => {
     res.json(course);
   });
 });
-// get data from subject
+// delete Courses
+server.delete("/deletecourse/:courseid", (req, res) => {
+  Course.findOneAndDelete({ _id: req.params.courseid }, function(err, users) {
+    res.json(users);
+  });
+});
+// update course
+server.put("/updateusercourse/:usercourse", (req, res) => {
+  console.log(req.body);
+  Course.findOneAndUpdate(
+    { _id: req.params.usercourse },
+    req.body,
+    (err, users) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.json(users);
+      }
+    }
+  );
+});
+// post data from subject
 server.post("/subject", (req, res) => {
   let newData = JSON.parse(JSON.stringify(req.body));
   let newBody = new Subject(newData).save();
@@ -89,6 +196,27 @@ server.get("/showSubject", (req, res) => {
   Subject.find({}, function(err, subjects) {
     res.json(subjects);
   });
+});
+// delete Subject
+server.delete("/deletesub/:subid", (req, res) => {
+  Subject.findOneAndDelete({ _id: req.params.subid }, function(err, users) {
+    res.json(users);
+  });
+});
+// update Subject
+server.put("/updateusersubject/:usersub", (req, res) => {
+  console.log(req.body);
+  Subject.findOneAndUpdate(
+    { _id: req.params.usersub },
+    req.body,
+    (err, users) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.json(users);
+      }
+    }
+  );
 });
 // server.get('/', (req, res) => {
 //   res.send('working')

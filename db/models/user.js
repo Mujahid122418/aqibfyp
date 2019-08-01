@@ -11,7 +11,8 @@ let UserSchema = mongoose.Schema({
   fatherCnic: String,
   address: String,
   contact: String,
-  remarks: String
+  remarks: String,
+  UserName:String
 });
 let User = mongoose.model("user", UserSchema);
 module.exports = User;
